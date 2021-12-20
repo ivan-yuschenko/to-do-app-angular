@@ -1,0 +1,35 @@
+<div class="wrapper">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Register</mat-card-title>
+      </mat-card-header>
+      <form>
+        <mat-card-content>
+            <div>
+                <mat-form-field [formGroup]="registrationForm"  class="input-width">
+                    <input matInput placeholder="Username" formControlName="name">
+                </mat-form-field>
+                <mat-error *ngIf="registrationForm.controls['name'].invalid && (registrationForm.controls['name'].dirty || registrationForm.controls['name'].touched)">Username can't be empty</mat-error>
+            </div>
+            <div>
+                <mat-form-field [formGroup]="registrationForm"  class="input-width">
+                    <input matInput placeholder="Email" formControlName="email" required>
+                </mat-form-field>
+                <mat-error *ngIf="registrationForm.controls['email'].invalid && (registrationForm.controls['email'].dirty || registrationForm.controls['email'].touched)">Not a valid email</mat-error>
+            </div>
+            <div>
+                <mat-form-field [formGroup]="registrationForm"  class="input-width">
+                    <input matInput placeholder="Password" formControlName="password" required>
+                </mat-form-field>
+                <mat-error *ngIf="registrationForm.controls['password'].invalid && (registrationForm.controls['password'].dirty || registrationForm.controls['password'].touched)">Password is too short</mat-error>
+            </div>
+            <mat-error *ngIf="showError">User already exists</mat-error>
+        </mat-card-content>
+        <div class="actions">
+            <button mat-flat-button color="primary" (click)="onRegister()">Register</button>
+            <p class=actions-txt>Already have an account?</p>
+            <button  mat-flat-button color="accent" [routerLink]="['/login']" routerLinkActive="active">Login</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>

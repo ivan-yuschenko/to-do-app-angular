@@ -1,0 +1,16 @@
+:host {
+    .wrapper {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+    }
+    .action-toolbar {
+        display: flex;
+        justify-content: space-between;
+    }
+    .center {
+        display: flex;
+        justify-content: center;
+    }
+}

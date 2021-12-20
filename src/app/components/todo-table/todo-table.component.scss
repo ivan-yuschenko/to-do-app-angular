@@ -1,0 +1,18 @@
+:host {
+    table {
+        width: 80%;
+        margin: 50px auto;
+    }
+    .hidden {
+        display: none;
+    }
+    .empty-content {
+        display: flex;
+        justify-content: center;
+        min-height: 200px;
+        div {
+            margin: auto 0;
+        }
+    }
+
+}

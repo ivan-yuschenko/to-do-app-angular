@@ -20,8 +20,8 @@ export class RegisterComponent {
       name: ['', Validators.required],
       email: ['', Validators.email],
       password: ['', Validators.minLength(6)]
-    })
-   }
+    });
+  }
 
   onRegister() {
     if (!this.registrationForm.controls['email'].invalid && !this.registrationForm.controls['password'].invalid && !this.registrationForm.controls['name'].invalid) {
@@ -42,5 +42,4 @@ export class RegisterComponent {
       });
     }
   }
-
 }

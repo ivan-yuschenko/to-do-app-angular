@@ -40,6 +40,6 @@ import { FakeBackend } from './services/fake-backend.service';
     })
   ],
   providers: [AuthGuard, FakeBackend],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -19,11 +19,11 @@ export class LogInComponent {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.email],
       password: ['', Validators.required]
-    })
-   }
-
+    });
+  }
 
   onLogin() {
+    console.log('snap', this.store.snapshot())
     if (!this.loginForm.controls['email'].invalid && !this.loginForm.controls['password'].invalid) {
       const payload: {email: string; password: string} = {
         email: this.loginForm.get('email')?.value,
@@ -40,5 +40,4 @@ export class LogInComponent {
       });
     }
   }
-
 }

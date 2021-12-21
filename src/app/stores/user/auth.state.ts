@@ -4,6 +4,7 @@ import { Login, Logout, Register } from './auth.actions';
 import { FakeBackend } from '../../services/fake-backend.service';
 import { Injectable } from '@angular/core';
 import { IUserState } from '../../interfaces/IUserState.interface'
+import { first } from 'rxjs';
 
 @State<IAuthState>({
     name: 'auth',
@@ -35,7 +36,7 @@ export class AuthState implements NgxsOnInit  {
 
     ngxsOnInit(ctx: StateContext<IAuthState>) {
         const token = this.backendService.getToken();
-        this.backendService.loginWithToken(token).subscribe((res: IUserState) => {
+        this.backendService.loginWithToken(token).pipe(first()).subscribe((res: IUserState) => {
             if (res.token) {
                 ctx.patchState({
                     token: res.token,
@@ -49,7 +50,7 @@ export class AuthState implements NgxsOnInit  {
     @Action(Register)
     register(ctx: StateContext<IAuthState>, action: Register) {
         if (!this.backendService.isUserRegistered(action.payload.email)) {
-            this.backendService.register(action.payload.name, action.payload.email, action.payload.password, action.payload.token).subscribe((res: IUserState) => {
+            this.backendService.register(action.payload.name, action.payload.email, action.payload.password, action.payload.token).pipe(first()).subscribe((res: IUserState) => {
                 if (res.token) {
                     ctx.patchState({
                         token: res.token,
@@ -63,7 +64,7 @@ export class AuthState implements NgxsOnInit  {
 
     @Action(Login)
     login(ctx: StateContext<IAuthState>, action: Login) {
-        this.backendService.login(action.payload.email, action.payload.password).subscribe((res: IUserState) => {
+        this.backendService.login(action.payload.email, action.payload.password).pipe(first()).subscribe((res: IUserState) => {
             if (res.token) {
                 ctx.patchState({
                     token: res.token,

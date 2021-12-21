@@ -8,6 +8,7 @@ import { Store } from '@ngxs/store';
 import { FakeBackend } from '../../services/fake-backend.service';
 import { Injectable } from '@angular/core';
 import { IUserList } from '../../interfaces/IUserList.interface';
+import { first } from 'rxjs';
 
 @State<IToDoState>({
   name: 'todo',
@@ -41,7 +42,7 @@ export class TodoState {
   createTodo(ctx: StateContext<IToDoState>, action: AddTodo) {
     const token =  this.store.selectSnapshot(AuthState.token);
     if (token) {
-      this.backendService.createTodo(token, action.payload).subscribe((res: IToDoItem) => {
+      this.backendService.createTodo(token, action.payload).pipe(first()).subscribe((res: IToDoItem) => {
         if (res) {
             ctx.patchState({
               todoList: [res, ...ctx.getState().todoList]
@@ -55,7 +56,7 @@ export class TodoState {
   deleteTodo(ctx: StateContext<IToDoState>, action: DeleteTodo) {
     const token =  this.store.selectSnapshot(AuthState.token);
     if (token) {
-      this.backendService.deleteTodo(token, action.payload).subscribe((res: IToDoItem) => {
+      this.backendService.deleteTodo(token, action.payload).pipe(first()).subscribe((res: IToDoItem) => {
         if (res) {
           const { todoList } = ctx.getState();
           ctx.patchState({
@@ -70,7 +71,7 @@ export class TodoState {
   toggleTodo(ctx: StateContext<IToDoState>, action: ToggleTodo) {
     const token =  this.store.selectSnapshot(AuthState.token);
     if (token) {
-      this.backendService.toggleTodo(token, action.payload).subscribe((res: IToDoItem) => {
+      this.backendService.toggleTodo(token, action.payload).pipe(first()).subscribe((res: IToDoItem) => {
         if (res) {
           ctx.setState(
             patch({
@@ -84,7 +85,7 @@ export class TodoState {
 
   @Action(SetTodoList)
   setTodoList(ctx: StateContext<IToDoState>, action: SetTodoList) {
-    this.backendService.getUser(action.payload).subscribe((res: IUserList) => {
+    this.backendService.getUser(action.payload).pipe(first()).subscribe((res: IUserList) => {
       if (res && res.todoList) {
         for (const data of res.todoList) {
           ctx.patchState({

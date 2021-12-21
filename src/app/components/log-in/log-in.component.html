@@ -1,29 +1,29 @@
 <div class="wrapper">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Log in</mat-card-title>
-      </mat-card-header>
-      <form>
-        <mat-card-content>
-          <div>
-            <mat-form-field [formGroup]="loginForm" class="input-width">
-                <input matInput placeholder="Email" formControlName="email" required>
-            </mat-form-field>
-            <mat-error *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">Not a valid email</mat-error>
-          </div>
-          <div>
-            <mat-form-field [formGroup]="loginForm" class="input-width">
-                <input matInput placeholder="Password" formControlName="password" type="password">
-            </mat-form-field>
-            <mat-error *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">Password can't be empty</mat-error>
-          </div>
-          <mat-error *ngIf="showError">Email or password is incorrect</mat-error>
-        </mat-card-content>
-        <div class="actions">
-            <button mat-flat-button color="primary" (click)="onLogin()">Log in</button>
-            <p class=actions-txt>Don't have an account yet?</p>
-            <button  mat-flat-button color="accent" [routerLink]="['/register']" routerLinkActive="active">Register</button>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="loginForm">
+      <mat-card-content>
+        <div>
+          <mat-form-field class="input-width">
+            <input matInput placeholder="Email" formControlName="email" required>
+          </mat-form-field>
+          <mat-error *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">Not a valid email</mat-error>
         </div>
-      </form>
-    </mat-card>
-  </div>
+        <div>
+          <mat-form-field class="input-width">
+            <input matInput placeholder="Password" formControlName="password" type="password">
+          </mat-form-field>
+          <mat-error *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">Password can't be empty</mat-error>
+        </div>
+        <mat-error *ngIf="showError">Email or password is incorrect</mat-error>
+      </mat-card-content>
+      <div class="actions">
+        <button mat-flat-button color="primary" (click)="onLogin()" id="loginBtn">Log in</button>
+        <p class=actions-txt>Don't have an account yet?</p>
+        <button  mat-flat-button color="accent" [routerLink]="['/register']" routerLinkActive="active"  id="registerBtn">Register</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -11,8 +11,8 @@ let token = localStorage.getItem('toDoToken') || '';
 
 export class FakeBackend {
 
-    isUserRegistered(token: string): boolean {
-        if (localData.find((x: IUserList) => x.token === token)) {
+    isUserRegistered(email: string): boolean {
+        if (localData.find((x: IUserList) => x.email === email)) {
             return true;
         } else {
             return false;

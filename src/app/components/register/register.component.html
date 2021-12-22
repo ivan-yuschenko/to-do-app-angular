@@ -19,7 +19,7 @@
         </div>
         <div>
           <mat-form-field class="input-width">
-            <input matInput placeholder="Password" formControlName="password" required>
+            <input matInput placeholder="Password" formControlName="password" required type="password">
           </mat-form-field>
           <mat-error *ngIf="registrationForm.controls['password'].invalid && (registrationForm.controls['password'].dirty || registrationForm.controls['password'].touched)">Password is too short</mat-error>
         </div>

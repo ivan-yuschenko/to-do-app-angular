@@ -5,4 +5,12 @@
   .welcome-msg {
     padding: 0 14px;
   }
+  .title {
+    display: inline-flex;
+  }
+  @media only screen and (max-width: 600px) {
+    .title {
+      display: none;
+    }
+  }
 } 

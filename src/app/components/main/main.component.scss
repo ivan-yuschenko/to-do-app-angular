@@ -6,6 +6,11 @@
       display: flex;
       justify-content: space-between;
     }
+    @media only screen and (max-width: 600px) {
+      .action-toolbar {
+        display: block;
+      }
+    }
     .center {
       display: flex;
       justify-content: center;

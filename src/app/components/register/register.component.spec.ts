@@ -9,6 +9,9 @@ import { FakeBackend } from 'src/app/services/fake-backend.service';
 import { RegisterComponent } from './register.component';
 import { LogInComponent } from '../log-in/log-in.component';
 import { Register } from 'src/app/stores/user/auth.actions';
+import { AngularMaterialModule } from '../../angular-material.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -35,7 +38,16 @@ describe('RegisterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent, LogInComponent],
-      imports: [FormsModule, ReactiveFormsModule, RouterTestingModule.withRoutes(routes), NgxsModule.forRoot([AuthState])],
+      imports: [
+        FormsModule, 
+        ReactiveFormsModule, 
+        RouterTestingModule.withRoutes(routes), 
+        NgxsModule.forRoot([AuthState], {
+          developmentMode: !environment.production
+        }),
+        AngularMaterialModule,
+        BrowserAnimationsModule
+      ],
       providers: [FakeBackend]
     })
     .compileComponents();

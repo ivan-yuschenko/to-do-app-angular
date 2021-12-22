@@ -1,42 +1,41 @@
 <div class="wrapper">
-    <mat-card>
-        <div class="action-toolbar">
-            <div>
-                <mat-form-field appearance="standard">
-                    <mat-label>Add Item</mat-label>
-                    <input matInput type="text" [(ngModel)]="value">
-                    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                      <mat-icon>close</mat-icon>
-                    </button>
-                </mat-form-field>
-                <button mat-button color="primary" (click)=addToDoItem()>
-                    <mat-icon>add</mat-icon>
-                </button>
-            </div>
-            <mat-form-field appearance="standard">
-                <mat-label>Search</mat-label>
-                <input matInput placeholder="Search" [(ngModel)]="filter">
-                <button *ngIf="filter" matSuffix mat-icon-button aria-label="Clear" (click)="filter=''">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </mat-form-field>
-        </div>
-      
-        <mat-tab-group dynamicHeight mat-align-tabs="center">
-          <mat-tab label="Active Tasks">
-            <app-todo-table [dataStream]="activeTodoList$"
-                            [filter]="filter"
-                          (removeItemEvent)="removeItem($event)" 
-                          (selectItemEvent)="toggleItemStatus($event)">
-            </app-todo-table>
-          </mat-tab>
-          <mat-tab label="Completed Tasks">
-            <app-todo-table [dataStream]="completedTodoList$"
-                            [filter]="filter"
-                          (removeItemEvent)="removeItem($event)" 
-                          (selectItemEvent)="toggleItemStatus($event)">
-            </app-todo-table>
-          </mat-tab>
-        </mat-tab-group>
-    </mat-card>
+  <mat-card>
+    <div class="action-toolbar">
+      <div>
+        <mat-form-field appearance="standard">
+          <mat-label>Add Item</mat-label>
+          <input matInput type="text" [(ngModel)]="value">
+          <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-button color="primary" (click)=addToDoItem()>
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <mat-form-field appearance="standard">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search" [(ngModel)]="filter">
+        <button *ngIf="filter" matSuffix mat-icon-button aria-label="Clear" (click)="filter=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <mat-tab-group dynamicHeight mat-align-tabs="center">
+      <mat-tab label="Active Tasks">
+        <app-todo-table [dataStream]="activeTodoList$"
+                        [filter]="filter"
+                      (removeItemEvent)="removeItem($event)" 
+                      (selectItemEvent)="toggleItemStatus($event)">
+        </app-todo-table>
+      </mat-tab>
+      <mat-tab label="Completed Tasks">
+        <app-todo-table [dataStream]="completedTodoList$"
+                        [filter]="filter"
+                      (removeItemEvent)="removeItem($event)" 
+                      (selectItemEvent)="toggleItemStatus($event)">
+        </app-todo-table>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
 </div>

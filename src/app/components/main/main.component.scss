@@ -1,16 +1,14 @@
 :host {
-    .wrapper {
-        width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 50px;
-    }
+  .wrapper {
+    width: 90%;
+    margin: 50px auto 0;
     .action-toolbar {
-        display: flex;
-        justify-content: space-between;
+      display: flex;
+      justify-content: space-between;
     }
     .center {
-        display: flex;
-        justify-content: center;
+      display: flex;
+      justify-content: center;
     }
+  }
 }

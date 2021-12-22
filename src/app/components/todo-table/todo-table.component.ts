@@ -57,5 +57,4 @@ export class TodoTableComponent implements OnInit, AfterViewInit, OnChanges {
   selected(item: IToDoItem) {
     this.selectItemEvent.emit(item);
   }
-
 }

@@ -8,6 +8,9 @@ import { NgxsModule, Store } from '@ngxs/store';
 import { FakeBackend } from 'src/app/services/fake-backend.service';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { Login, Register } from './stores/user/auth.actions';
+import { AngularMaterialModule } from './angular-material.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -39,7 +42,14 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [RouterTestingModule.withRoutes(routes), NgxsModule.forRoot([AuthState])],
+      imports: [
+        RouterTestingModule.withRoutes(routes), 
+        NgxsModule.forRoot([AuthState], {
+          developmentMode: !environment.production
+        }),
+        AngularMaterialModule,
+        BrowserAnimationsModule
+      ],
       providers: [FakeBackend]
     }).compileComponents();
   });
@@ -60,6 +70,7 @@ describe('AppComponent', () => {
 
   it('check original data', () => {
     localStorage.setItem('toDoData', JSON.stringify([]));
+    store.reset(originalState);
     const name = component.name;
     const showLogout = component.showLogout;
     expect(name).toEqual('Stranger');
@@ -68,10 +79,20 @@ describe('AppComponent', () => {
 
   it('check data after login', () => {
     localStorage.setItem('toDoData', JSON.stringify([]));
+    store.reset(originalState);
     store.dispatch(new Register(registerData));
     store.dispatch(new Login(loginData));
     expect(component.name).toEqual(registerData.name);
     expect(component.showLogout).toEqual(true);
+  });
+
+  it ('check logout behaviour', () => {
+    component.showLogout = true;
+    fixture.detectChanges();
+    component.onLogout();
+    fixture.whenStable().then(() => {
+      expect(location.path()).toEqual('/login');
+    });
   });
 
 });

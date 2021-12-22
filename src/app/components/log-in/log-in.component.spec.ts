@@ -9,6 +9,9 @@ import { AuthState } from '../../stores/user/auth.state';
 import { Register } from '../../stores/user/auth.actions';
 import { FakeBackend } from 'src/app/services/fake-backend.service';
 import { LogInComponent } from './log-in.component';
+import { AngularMaterialModule } from '../../angular-material.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
 
 describe('LogInComponent', () => {
   let component: LogInComponent;
@@ -34,7 +37,16 @@ describe('LogInComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LogInComponent, RegisterComponent],
-      imports: [FormsModule, ReactiveFormsModule, RouterTestingModule.withRoutes(routes), NgxsModule.forRoot([AuthState])],
+      imports: [
+        FormsModule, 
+        ReactiveFormsModule, 
+        RouterTestingModule.withRoutes(routes), 
+        NgxsModule.forRoot([AuthState], {
+          developmentMode: !environment.production
+        }),
+        AngularMaterialModule,
+        BrowserAnimationsModule
+      ],
       providers: [FakeBackend]
     })
     .compileComponents();
@@ -81,6 +93,7 @@ describe('LogInComponent', () => {
 
   it('check login button behaviour', () => {
     localStorage.setItem('toDoData', JSON.stringify([]));
+    store.reset(originalState);
     const button = fixture.debugElement.nativeElement.querySelector('#loginBtn');
     const loginForm = component.loginForm;
     let loginValues = {
